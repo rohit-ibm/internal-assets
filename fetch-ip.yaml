@@ -1,0 +1,14 @@
+---
+- name: Fetch IP Address Info from Cisco Router
+  hosts: router
+  gather_facts: no
+
+  tasks:
+    - name: Get interface details
+      cisco.ios.ios_command:
+        commands: "show ip interface brief"
+      register: ip_output
+
+    - name: Display IP Address Output
+      debug:
+        var: ip_output.stdout_lines
